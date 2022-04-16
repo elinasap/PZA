@@ -21,12 +21,17 @@ public:
     }
 };
 
-class Robot:public Human {
+class Robot: {
+
+    commandStrategy* commandStrategy;
 public:
+    void getCommand() {
+        void command = commandStrategy->getCommand();
+    }
 
     int a = 0;
 
-    int move(int x1 = 0, int y1 = 0) {
+    int move (int x1 = 0, int y1 = 0) {
         while (x1 != x && y1 != y) {
             if (a = 0)
             {
@@ -79,6 +84,28 @@ public:
         States state = on;
     }
 };
+
+class commandStrategy {
+public:
+    virtual void getCommand()=0;
+};
+
+class consoleCommandStrategy : public commandStrategy {
+public:
+    void getCommand() {
+        cout << "\nconsole";
+    }
+
+};
+
+class netCommandStrategy : public commandStrategy {
+public:
+    void getCommand() {
+        cout << "\nnet";
+    }
+
+}
+
 
 int main() {
     Human man;
